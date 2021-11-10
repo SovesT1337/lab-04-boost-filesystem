@@ -4,14 +4,14 @@
 
 file filter(string st) {
   file temp;
-  string st1 = st, st2;
-  while (st1.find('/') != string::npos) {
-    st2 = st1.substr(0, st1.find('/'));
-    st1.erase(0, st1.find('/') + 1);
+
+  std::smatch parts;
+  std::regex re(R"(/(\w+)/(balance_(\d){8}_(\d){8}\.txt))");
+  if (std::regex_search(st, parts, re)) {
+    temp.fullname = parts[2];
+    temp.account = temp.fullname.substr(8, 8);
+    temp.broker = parts[1];
   }
-  temp.fullname = st1;
-  temp.account = st1.substr(8, 8);
-  temp.broker = st2;
   return temp;
 }
 
@@ -56,7 +56,7 @@ void magic(const vector<file>& list) {
   magic_print(acc);
 }
 
-void walker(const path& p, vector<file> &list){
+void walker(const path& p, vector<file>& list) {
   if (exists(p)) {
     for (directory_entry& x : directory_iterator(p)) {
       if (is_directory(x)) {
@@ -64,7 +64,7 @@ void walker(const path& p, vector<file> &list){
       }
       if (is_regular_file(x)) {
         file temp = filter(x.path().string());
-        if (temp.fullname.size() == 29) {
+        if (temp.fullname != "") {
           list.push_back(temp);
         }
       }

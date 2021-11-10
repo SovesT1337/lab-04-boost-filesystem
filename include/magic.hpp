@@ -2,15 +2,13 @@
 
 #ifndef INCLUDE_EXAMPLE_HPP_
 #define INCLUDE_EXAMPLE_HPP_
-//
-//#define BOOST_NO_CXX11_SCOPED_ENUMS
+
 #include <boost/filesystem.hpp>
-//#undef BOOST_NO_CXX11_SCOPED_ENUMS
 #include <iostream>
 #include <string>
 #include <vector>
+#include <regex>
 
-using namespace boost::filesystem;
 using boost::filesystem::directory_entry;
 using boost::filesystem::directory_iterator;
 using boost::filesystem::exists;
@@ -29,8 +27,8 @@ struct file {
 };
 
 struct account {
-  string broker;
-  string name;
+  string broker = "";
+  string name = "";
   int count = 0;
   int date = 0;
 };

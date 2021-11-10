@@ -32,10 +32,7 @@ hunter_add_package(GTest)
 
 find_package(GTest CONFIG REQUIRED)
 
-# download boost
 hunter_add_package(Boost COMPONENTS system filesystem)
-
-# now boost can be used
 find_package(Boost CONFIG REQUIRED system filesystem)
 
 

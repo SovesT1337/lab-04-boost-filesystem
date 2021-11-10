@@ -1,5 +1,6 @@
 #include <magic.hpp>
 
+
 int main(int argc, char* argv[]) {
   path p;
   if (argc >= 2) p = argv[1];

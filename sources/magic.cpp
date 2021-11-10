@@ -56,8 +56,8 @@ void magic(const vector<file>& list) {
   magic_print(acc);
 }
 
-void walker(path p, vector<file> &list){
-
+vector<file> walker(path p){
+  vector<file> list;
   if (exists(p)) {
     for (directory_entry& x : directory_iterator(p)) {
       if (is_directory(x)) {
@@ -78,5 +78,5 @@ void walker(path p, vector<file> &list){
       }
     }
   }
-
+  return list;
 }

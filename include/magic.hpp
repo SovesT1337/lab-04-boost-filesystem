@@ -40,6 +40,6 @@ void print(const vector<file>& list);
 size_t exist(vector<account> acc, file f);
 void magic(const vector<file>& list);
 void magic_print(vector<account> acc);
-vector<file> walker(const path& p);
+void walker(const path&, vector<file>&);
 
 #endif  // INCLUDE_EXAMPLE_HPP_

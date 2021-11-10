@@ -56,19 +56,11 @@ void magic(const vector<file>& list) {
   magic_print(acc);
 }
 
-vector<file> walker(const path& p){
-  vector<file> list;
+void walker(const path& p, vector<file> &list){
   if (exists(p)) {
     for (directory_entry& x : directory_iterator(p)) {
       if (is_directory(x)) {
-        for (directory_entry& z : directory_iterator(x)) {
-          if (is_regular_file(z)) {
-            file temp = filter(z.path().string());
-            if (temp.fullname.size() == 29) {
-              list.push_back(temp);
-            }
-          }
-        }
+        walker(x.path(), list);
       }
       if (is_regular_file(x)) {
         file temp = filter(x.path().string());
@@ -78,5 +70,4 @@ vector<file> walker(const path& p){
       }
     }
   }
-  return list;
 }

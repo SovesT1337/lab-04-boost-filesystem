@@ -1,13 +1,13 @@
 // Copyright 2021 SovesT
 
-#ifndef INCLUDE_EXAMPLE_HPP_
-#define INCLUDE_EXAMPLE_HPP_
+#ifndef INCLUDE_MAGIC_HPP_
+#define INCLUDE_MAGIC_HPP_
 
 #include <boost/filesystem.hpp>
 #include <iostream>
+#include <regex>
 #include <string>
 #include <vector>
-#include <regex>
 
 using boost::filesystem::directory_entry;
 using boost::filesystem::directory_iterator;
@@ -17,6 +17,9 @@ using boost::filesystem::is_regular_file;
 using boost::filesystem::path;
 using std::cout;
 using std::endl;
+using std::regex;
+using std::regex_search;
+using std::smatch;
 using std::string;
 using std::vector;
 
@@ -27,17 +30,17 @@ struct file {
 };
 
 struct account {
-  string broker = "";
-  string name = "";
+  string broker;
+  string name;
   int count = 0;
   int date = 0;
 };
 
-file filter(string st);
+file filter(const string& st);
 void print(const vector<file>& list);
-size_t exist(vector<account> acc, file f);
+size_t exist(vector<account> acc, const file& f);
 void magic(const vector<file>& list);
-void magic_print(vector<account> acc);
+void magic_print(const vector<account>& acc);
 void walker(const path&, vector<file>&);
 
-#endif  // INCLUDE_EXAMPLE_HPP_
+#endif  // INCLUDE_MAGIC_HPP_

@@ -2,12 +2,11 @@
 
 #include <magic.hpp>
 
-file filter(string st) {
+file filter(const string& st) {
   file temp;
-
-  std::smatch parts;
-  std::regex re(R"(/(\w+)/(balance_(\d){8}_(\d){8}\.txt))");
-  if (std::regex_search(st, parts, re)) {
+  smatch parts;
+  regex re(R"(/(\w+)/(balance_(\d){8}_(\d){8}\.txt))");
+  if (regex_search(st, parts, re)) {
     temp.fullname = parts[2];
     temp.account = temp.fullname.substr(8, 8);
     temp.broker = parts[1];
@@ -21,15 +20,15 @@ void print(const vector<file>& list) {
   }
 }
 
-size_t exist(vector<account> acc, file f) {
+size_t exist(vector<account> acc, const file& f) {
   for (size_t i = 0; i < acc.size(); ++i) {
     if (f.account == acc[i].name) return i;
   }
   return acc.size();
 }
 
-void magic_print(vector<account> acc) {
-  for (account i : acc) {
+void magic_print(const vector<account>& acc) {
+  for (const account& i : acc) {
     cout << "broker: " << i.broker << " account: " << i.name
          << " files: " << i.count << " lastdate: " << i.date << endl;
   }
@@ -64,7 +63,7 @@ void walker(const path& p, vector<file>& list) {
       }
       if (is_regular_file(x)) {
         file temp = filter(x.path().string());
-        if (temp.fullname != "") {
+        if (!temp.fullname.empty()) {
           list.push_back(temp);
         }
       }

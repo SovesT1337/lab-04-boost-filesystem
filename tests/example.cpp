@@ -1,10 +1,9 @@
-// Copyright 2021 Your Name <your_email>
-
-#include <stdexcept>
+// Copyright 2021 SovesT
 
 #include <gtest/gtest.h>
 
-#include <example.hpp>
+#include <magic.hpp>
+#include <stdexcept>
 
 TEST(Example, EmptyTest) {
     EXPECT_THROW(example(), std::runtime_error);

@@ -39,10 +39,12 @@ find_package(Boost CONFIG REQUIRED system filesystem)
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/magic.cpp
+        include/magic.hpp
 )
 
 add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
+        sources/magic.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -50,7 +52,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
-target_link_libraries(demo ${PROJECT_NAME}
+target_link_libraries(demo
+        ${PROJECT_NAME}
         Boost::filesystem
         Boost::system
         )

@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-//using namespace boost::filesystem;
+using namespace boost::filesystem;
 using boost::filesystem::directory_entry;
 using boost::filesystem::directory_iterator;
 using boost::filesystem::exists;

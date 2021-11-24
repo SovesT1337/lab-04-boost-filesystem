@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,22 +29,20 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 # new versions of cmake contain gtest search files
 # commented out to increase the build speed.
 hunter_add_package(GTest)
-
 find_package(GTest CONFIG REQUIRED)
 
 hunter_add_package(Boost COMPONENTS system filesystem)
 find_package(Boost CONFIG REQUIRED system filesystem)
 
-
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-        ${CMAKE_CURRENT_SOURCE_DIR}/sources/magic.cpp
-        include/magic.hpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/magic.cpp
+  include/magic.hpp
 )
 
 add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
-        sources/magic.cpp
+  sources/magic.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -52,11 +50,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
-target_link_libraries(demo
-        ${PROJECT_NAME}
-        Boost::filesystem
-        Boost::system
-        )
+target_link_libraries(demo ${PROJECT_NAME} Boost::filesystem Boost::system)
 
 if(BUILD_TESTS)
   add_executable(tests
